@@ -25,21 +25,23 @@ export class AppService {
     const words: Array<Word> = [
       {
         en: 'advantage',
-        ru: 'достоинство',
+        ru: 'достоинство'
       },
       {
         en: 'prevents',
-        ru: 'избежать',
+        ru: 'избежать'
       },
       {
         en: 'thus',
-        ru: 'Таким образом',
+        ru: 'Таким образом'
       },
       {
         en: 'underlying',
-        ru: 'лежащий в основе',
-      },
+        ru: 'лежащий в основе'
+      }
     ]
+
+    return 'server'
 
     // const en = 'advasntage'
     // const textToAudioRu = 'дост+оинство'
@@ -47,40 +49,40 @@ export class AppService {
 
     // params.append('name', '')
 
-    const wordsPromises = words.map((word) => {
-      const audioFilename = word.en
+    // const wordsPromises = words.map((word) => {
+    //   const audioFilename = word.en
 
-      const params = new URLSearchParams()
-      params.append('text', word.ru)
-      params.append('lang', 'ru-RU')
-      params.append('speed', '1.1')
-      params.append('voice', 'filipp')
-      params.append('emotion', 'neutral')
-      params.append('folderId', 'b1g2mvi7sb9qmh3os2l4')
+    //   const params = new URLSearchParams()
+    //   params.append('text', word.ru)
+    //   params.append('lang', 'ru-RU')
+    //   params.append('speed', '1.1')
+    //   params.append('voice', 'filipp')
+    //   params.append('emotion', 'neutral')
+    //   params.append('folderId', 'b1g2mvi7sb9qmh3os2l4')
 
-      return this.httpService
-        .request({
-          method: 'post',
-          url: 'https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize',
-          params: params,
-          headers: {
-            name: audioFilename,
-            Authorization:
-              'Bearer t1.9euelZqSjM2clpzGksuNmIuWjsmYnu3rnpWamJGNipCOis_PlZbJkM_Ll57l9PdLP2AA-u8nEXXR3fT3C25dAPrvJxF10Q.Pa-uIv1qDQ9LQ5crHWZibV8nvXFcGxki3EA5aUMG_XVMDByhuH-5PtkfTc2CGYgdNLsmZnb_5w1LHHNgQCFADQ',
-          },
-          responseType: 'stream',
-        })
-        .toPromise()
-    })
+    //   return this.httpService
+    //     .request({
+    //       method: 'post',
+    //       url: 'https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize',
+    //       params: params,
+    //       headers: {
+    //         name: audioFilename,
+    //         Authorization:
+    //           'Bearer t1.9euelZqSjM2clpzGksuNmIuWjsmYnu3rnpWamJGNipCOis_PlZbJkM_Ll57l9PdLP2AA-u8nEXXR3fT3C25dAPrvJxF10Q.Pa-uIv1qDQ9LQ5crHWZibV8nvXFcGxki3EA5aUMG_XVMDByhuH-5PtkfTc2CGYgdNLsmZnb_5w1LHHNgQCFADQ'
+    //       },
+    //       responseType: 'stream'
+    //     })
+    //     .toPromise()
+    // })
 
-    return Promise.all(wordsPromises).then((responses) => {
-      for (const response of responses) {
-        const name = response.config.headers.name
+    // return Promise.all(wordsPromises).then((responses) => {
+    //   for (const response of responses) {
+    //     const name = response.config.headers.name
 
-        response.data.pipe(fs.createWriteStream(`media/ru/${name}_1.ogg`))
-      }
+    //     response.data.pipe(fs.createWriteStream(`media/ru/${name}_1.ogg`))
+    //   }
 
-      return 'new version 5'
-    })
+    //   return 'new version 5'
+    // })
   }
 }

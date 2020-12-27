@@ -37,3 +37,4 @@ lerna-debug.log*
 *.lock
 *.ogg
 .DS_Store
+workspace.code-workspace
